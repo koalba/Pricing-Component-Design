@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Component Design | Koalba</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orelega+One&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="main">
+        <div class="products">
+            <ul class="products__ul">
+                <li class="product lite">
+                    <p class="product__title">Lite</p>
+                    <p class="product__price"><span>€</span>15<span>/month</span></p>
+                    <ul class="product__ul">
+                        <li class="product__li">
+                            <p class="product__p"><span class="product__span active"></span>Lorem Ipsum</p>
+                        </li>
+                        <li class="product__li">
+                            <p class="product__p"><span class="product__span"></span>Lorem Ipsum</p>
+                        </li>
+                        <li class="product__li">
+                            <p class="product__p"><span class="product__span"></span>Lorem Ipsum</p>
+                        </li>
+                        <li class="product__li">
+                            <p class="product__p"><span class="product__span"></span>Lorem Ipsum</p>
+                        </li>
+                    </ul>
+                    <button class="product__button" value="lite" onclick="calcPrice(this)">Start now!</button>
+                </li>
+                <li class="product standard">
+                    <p class="product__title">Standard</p>
+                    <p class="product__price"><span>€</span>50<span>/month</span></p>
+                    <ul class="product__ul">
+                        <li class="product__li">
+                            <p class="product__p"><span class="product__span active"></span>Lorem Ipsum</p>
+                        </li>
+                        <li class="product__li">
+                            <p class="product__p"><span class="product__span active"></span>Lorem Ipsum</p>
+                        </li>
+                        <li class="product__li">
+                            <p class="product__p"><span class="product__span"></span>Lorem Ipsum</p>
+                        </li>
+                        <li class="product__li">
+                            <p class="product__p"><span class="product__span"></span>Lorem Ipsum</p>
+                        </li>
+                    </ul>
+                    <button class="product__button" value="standard" onclick="calcPrice(this)">Start now!</button>
+                </li>
+                <li class="product premium">
+                    <p class="product__title">Premium</p>
+                    <p class="product__price"><span>€</span>200<span>/month</span></p>
+                    <ul class="product__ul">
+                        <li class="product__li">
+                            <p class="product__p"><span class="product__span active"></span>Lorem Ipsum</p>
+                        </li>
+                        <li class="product__li">
+                            <p class="product__p"><span class="product__span active"></span>Lorem Ipsum</p>
+                        </li>
+                        <li class="product__li">
+                            <p class="product__p"><span class="product__span active"></span>Lorem Ipsum</p>
+                        </li>
+                        <li class="product__li">
+                            <p class="product__p"><span class="product__span active"></span>Lorem Ipsum</p>
+                        </li>
+                    </ul>
+                    <button class="product__button" value="premium" onclick="calcPrice(this)">Start now!</button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="cart">
+            <h2 class="cart__h2">Your Cart</h2>
+            <div class="cart__container">
+                <div class="cart__product">
+                    
+                </div class="cart__product">
+                <div class="cart__table">
+                    <h3 class="cart__summary">Order summary</h3>
+                    <ul class="cart__ul">
+                        <li class="cart__li">
+                            <p class="cart__p">Product:</p>
+                            <p class="cart__p base"><span>0</span>€</p>
+                        </li>
+                        <li class="cart__li">
+                            <p class="cart__p">Taxes:</p>
+                            <p class="cart__p tax"><span>0</span>€</p>
+                        </li>
+                        <li class="cart__li">
+                            <p class="cart__p">Shipment:</p>
+                            <p class="cart__p ship"><span>0</span>€</p>
+                        </li>
+                        <li class="cart__li">
+                            <p class="cart__p">Total:</p>
+                            <p class="cart__p total"><span>0</span>€</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <button class="cart__button" onclick="goBack()">Go Back!</button>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
