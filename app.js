@@ -1,112 +1,77 @@
 'use strict'
 
+const d = document
+
 const IVA = 21
 
 const lite = 15
 const standard = 50
 const premium = 200
 
-function calcPrice(product){
+const paintPrice = price => "<span>" + price + "</span>€"
+const triggerAnimation = () => d.querySelector('.products').classList.toggle('up')
+const calcIVA = ( number, percentaje ) => (number * percentaje)/100
+const calcTotal = ( number, IVA, send ) => number + IVA + send
+
+function calcPrice( product ){
     let type = product.value
     let price
 
-    if( type === "lite" ){
-        price = lite
-    } else if( type === "standard" ){
-        price = standard
-    } else if( type === "premium" ){
-        price = premium
+    switch (type) {
+        case 'standard':
+
+            price = standard
+
+        break;
+        case 'premium':
+
+            price = premium
+
+        break;
+        default:
+
+            price = lite
+
+        break;
     }
 
-    let resultIVA = calcIVA(price, IVA)
+    let resultIVA = calcIVA( price, IVA )
+    let resultShip = price >= 50 ? 0 : 10
 
-    let resultShip
-
-    if ( price >= 50){
-        resultShip = 0 // ENVIO GRATINS
-    } else {
-        resultShip = 10 //ENVIO 10€
-    }
-
-    let resultTotal = calcTotal(price, resultIVA, resultShip)
-
-    writePrice(price, resultIVA, resultShip, resultTotal)
+    let resultTotal = calcTotal( price, resultIVA, resultShip )
+    writePrice( price, resultIVA, resultShip, resultTotal )
 
     triggerAnimation()
 
-    createCard(type, price)
+    createCard( type, price )
 }
 
 
-function writePrice(base, iva, ship, total){
+function writePrice( base, iva, ship, total ){
 
-    let nodeBase = document.querySelector('.base')
-    let nodeIVA = document.querySelector('.tax')
-    let nodeShip = document.querySelector('.ship')
-    let nodeTotal = document.querySelector('.total')
+    d.querySelector('.base').innerHTML = paintPrice( base )
+    d.querySelector('.tax').innerHTML = paintPrice( iva )
+    d.querySelector('.ship').innerHTML =  ship === 0 ? "FREE" : paintPrice( ship )
+    d.querySelector('.total').innerHTML = paintPrice( total )
 
-    nodeBase.innerHTML = "<span>" + base + "</span>€"
-    nodeIVA.innerHTML = "<span>" + iva + "</span>€"
-    
-    if(ship === 0){
-        nodeShip.innerHTML = "FREE"
-    } else {
-        nodeShip.innerHTML = "<span>" + ship + "</span>€"
-    }
-
-    nodeTotal.innerHTML = "<span>" + total + "</span>€"
-}
-
-function triggerAnimation(){
-    let container = document.querySelector('.products')
-
-    container.classList.toggle('up')
 }
 
 function createCard(type, price){
-    let nodeproduct = document.querySelector('.cart__product')
+    let nodeproduct = d.querySelector('.cart__product')
+    
+    nodeproduct.classList.remove('standard', 'premium', 'lite')
+    nodeproduct.classList.add( type )
 
-    if( type === "lite" ){
-
-        nodeproduct.classList.remove('standard')
-        nodeproduct.classList.remove('premium')
-
-        nodeproduct.classList.add('lite')
-
-    } else if (type === "standard"){
-
-        nodeproduct.classList.remove('lite')
-        nodeproduct.classList.remove('premium')
-
-        nodeproduct.classList.add('standard')
-
-    } else if (type === "premium"){
-
-        nodeproduct.classList.remove('standard')
-        nodeproduct.classList.remove('lite')
-
-        nodeproduct.classList.add('premium')
-
-    }
-
-    nodeproduct.innerHTML = '<p class="cart__title">' + type + '</p><p class="cart__price"><span>' + price + '</span>€/month</p>'
+    nodeproduct.innerHTML = `<p class="cart__title">${ type }</p><p class="cart__price"><span>${ price }</span>€/month</p>`
     
 }
 
-function calcIVA ( number , percentaje){
+d.querySelectorAll('.product__button').forEach( button => {
+    button.addEventListener('click', function(){
+        calcPrice( this )
+    })
+})
 
-    let result = (number * percentaje)/100
-    return result
+d.querySelector('.cart__button').addEventListener('click', triggerAnimation)
 
-}
 
-function calcTotal ( number, IVA, send ){
-
-    let result = number + IVA + send
-    return result
-
-}
-
-function goBack(){
-    triggerAnimation()
-}
